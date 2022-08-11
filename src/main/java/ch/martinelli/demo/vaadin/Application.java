@@ -2,6 +2,7 @@ package ch.martinelli.demo.vaadin;
 
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * and some desktop browsers.
  *
  */
+@Push // REMARK Enable Push to refres the View
 @SpringBootApplication
 @Theme(value = "vaadin-spring-events")
 @PWA(name = "vaadin-spring-events", shortName = "vaadin-spring-events", offlineResources = {})

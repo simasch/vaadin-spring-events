@@ -1,12 +1,13 @@
 package ch.martinelli.demo.vaadin.data.service;
 
 import ch.martinelli.demo.vaadin.data.entity.SamplePerson;
-import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SamplePersonService {
@@ -22,7 +23,7 @@ public class SamplePersonService {
         return repository.findById(id);
     }
 
-    public SamplePerson update(SamplePerson entity) {
+    public SamplePerson save(SamplePerson entity) {
         return repository.save(entity);
     }
 
