@@ -1,8 +1,6 @@
 package ch.martinelli.demo.vaadin.views;
 
 
-import ch.martinelli.demo.vaadin.components.appnav.AppNav;
-import ch.martinelli.demo.vaadin.components.appnav.AppNavItem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -11,6 +9,8 @@ import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 
 /**
@@ -50,14 +50,11 @@ public class MainLayout extends AppLayout {
         return section;
     }
 
-    private AppNav createNavigation() {
-        // AppNav is not yet an official component.
-        // For documentation, visit https://github.com/vaadin/vcf-nav#readme
-        AppNav nav = new AppNav();
-        nav.addClassNames("app-nav");
+    private SideNav createNavigation() {
+        SideNav nav = new SideNav();
 
-        nav.addItem(new AppNavItem("Grid", GridView.class, "la la-columns"));
-        nav.addItem(new AppNavItem("Form", FormView.class, "la la-columns"));
+        nav.addItem(new SideNavItem("Grid", GridView.class));
+        nav.addItem(new SideNavItem("Form", FormView.class));
 
         return nav;
     }

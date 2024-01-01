@@ -10,19 +10,22 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.domain.PageRequest;
 
+@VaadinSessionScope
 @PageTitle("Grid")
 @Route(value = "grid", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 @Uses(Icon.class)
 public class GridView extends VerticalLayout implements ApplicationListener<SamplePersonAddedEvent> {
 
-    private Grid<SamplePerson> grid = new Grid<>(SamplePerson.class, false);
+    private final UI ui;
+    private final Grid<SamplePerson> grid = new Grid<>(SamplePerson.class, false);
 
     @Autowired
     public GridView(SamplePersonService samplePersonService, ConfigurableApplicationContext applicationContext) {
@@ -35,6 +38,8 @@ public class GridView extends VerticalLayout implements ApplicationListener<Samp
 
         grid.setItems(query -> samplePersonService.list(PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query))).stream());
 
+        ui = UI.getCurrent();
+
         add(grid);
 
         // Register as EventListener
@@ -44,6 +49,6 @@ public class GridView extends VerticalLayout implements ApplicationListener<Samp
 
     @Override
     public void onApplicationEvent(SamplePersonAddedEvent event) {
-        UI.getCurrent().access(() -> grid.getDataProvider().refreshAll());
+        ui.access(() -> grid.getDataProvider().refreshAll());
     }
 }

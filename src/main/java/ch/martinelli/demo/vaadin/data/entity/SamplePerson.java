@@ -1,7 +1,8 @@
 package ch.martinelli.demo.vaadin.data.entity;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
-import javax.persistence.Entity;
 
 @Entity
 public class SamplePerson extends AbstractEntity {
